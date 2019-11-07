@@ -1,6 +1,7 @@
 import React from 'react'
 import { TodoHeader } from './TodoHeader';
 import { TodoRow } from './TodoRow'
+import { TodoCreate } from './TodoCreate'
 
 class App extends React.Component {
 
@@ -18,18 +19,12 @@ class App extends React.Component {
     }
   }
 
-  updateNewTaskAction = (e) => {
+  createNewTask = (newTask) => {
     this.setState({
-      newTask: e.target.value
-    })
-  }
-
-  createNewTask = () => {
-    this.setState({
-      tasks: [...this.state.tasks, { action: this.state.newTask, done: false }],
+      tasks: [...this.state.tasks, { action: newTask, done: false }],
       newTask: ''
     })
-  }
+  }  
 
   changeTaskDone = (task) => {
     this.setState({
@@ -46,8 +41,7 @@ class App extends React.Component {
     <div>
       <TodoHeader name={this.state.name} tasks={this.state.tasks} />
       <div className="container-fluid">
-        <input onChange={this.updateNewTaskAction} value={this.state.newTask} className="form-control" />
-        <button onClick={this.createNewTask} className="btn btn-primary mt-2">Adicionar</button>
+        <TodoCreate callback={this.createNewTask} />
         <table className="table table-striped table-bordered mt-2">
         <thead><tr><th>Descrição</th><th>Feito</th></tr></thead>
         <tbody>{this.tasksTable()}</tbody>
