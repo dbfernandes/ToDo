@@ -1,4 +1,5 @@
 import React from 'react'
+import { TodoHeader } from './TodoHeader';
 
 class App extends React.Component {
 
@@ -45,10 +46,7 @@ class App extends React.Component {
 
   render = () =>
     <div>
-      <h4 className="bg-primary text-white text-center p-2">
-        {this.state.name}'s To Do List &mdash; Tarefas a fazer:&nbsp;
-        {this.state.tasks.filter(t => !t.done).length}
-      </h4>
+      <TodoHeader name={this.state.name} tasks={this.state.tasks} />
       <div className="container-fluid">
         <input onChange={this.updateNewTaskAction} value={this.state.newTask} className="form-control" />
         <button onClick={this.createNewTask} className="btn btn-primary mt-2">Adicionar</button>
