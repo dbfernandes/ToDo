@@ -29,6 +29,20 @@ class App extends React.Component {
     })
   }
 
+  changeTaskDone = (task) => {
+    this.setState({
+      tasks: this.state.tasks.map((t) => (task.action===t.action)?{ action:t.action, done:!t.done }: t)
+    });
+  }
+
+  tasksTable = () => 
+    this.state.tasks.map((task) => 
+      <tr key={task.action}>
+        <td>{task.action}</td>
+        <td><input onChange={() => this.changeTaskDone(task)} type="checkbox" defaultChecked={task.done}/></td>
+      </tr>
+    )
+
   render = () =>
     <div>
       <h4 className="bg-primary text-white text-center p-2">
@@ -37,7 +51,11 @@ class App extends React.Component {
       </h4>
       <div className="container-fluid">
         <input onChange={this.updateNewTaskAction} value={this.state.newTask} className="form-control" />
-        <button onClick={this.createNewTask} className="btn btn-primary mt-1">Adicionar</button>
+        <button onClick={this.createNewTask} className="btn btn-primary mt-2">Adicionar</button>
+        <table className="table table-striped table-bordered mt-2">
+        <thead><tr><th>Descrição</th><th>Feito</th></tr></thead>
+        <tbody>{this.tasksTable()}</tbody>
+      </table>        
       </div>
     </div>
 }
