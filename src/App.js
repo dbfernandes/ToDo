@@ -1,5 +1,6 @@
 import React from 'react'
 import { TodoHeader } from './TodoHeader';
+import { TodoRow } from './TodoRow'
 
 class App extends React.Component {
 
@@ -38,10 +39,7 @@ class App extends React.Component {
 
   tasksTable = () => 
     this.state.tasks.map((task) => 
-      <tr key={task.action}>
-        <td>{task.action}</td>
-        <td><input onChange={() => this.changeTaskDone(task)} type="checkbox" defaultChecked={task.done}/></td>
-      </tr>
+    <TodoRow key={task.action} task={task} callback={this.changeTaskDone} />
     )
 
   render = () =>
