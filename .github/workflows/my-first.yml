@@ -1,0 +1,9 @@
+name: My Fist Workflow
+on: workflow_dispatch
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Run a oneline script
+        run: echo Hello World!
+    
